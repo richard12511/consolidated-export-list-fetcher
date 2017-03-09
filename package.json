@@ -1,0 +1,19 @@
+{
+  "name": "consolidated-list-fetcher",
+  "version": "1.0.0",
+  "description": "fetches the consolidated list from the .gov website and saves it to an amazon s3 bucket",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HeatTransferResearch/consolidated-list-fetcher.git"
+  },
+  "author": "richard12511",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HeatTransferResearch/consolidated-list-fetcher/issues"
+  },
+  "homepage": "https://github.com/HeatTransferResearch/consolidated-list-fetcher#readme"
+}
