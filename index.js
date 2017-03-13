@@ -6,10 +6,10 @@ const baseUrl = "https://api.trade.gov/v2/consolidated_screening_list/search?api
 
 function uploadToS3(keyName, body){
 
-  var bucketName = 'export-control-prod'
+  let bucketName = 'export-control-prod'
 
   s3.createBucket({Bucket: bucketName}, function() {
-    var params = {Bucket: bucketName, Key: keyName, Body: body};
+    let params = {Bucket: bucketName, Key: keyName, Body: body};
     s3.putObject(params, function(err, data) {
       if (err)
         console.log(err)
@@ -38,11 +38,11 @@ co(function *() {
 
   json = json.replace(/,\s*$/, "");
 
-  var today = new Date();
-  var dd = today.getDate();
-  var mm = today.getMonth()+1; //January is 0!
+  let today = new Date();
+  let dd = today.getDate();
+  let mm = today.getMonth()+1; //January is 0!
 
-  var yyyy = today.getFullYear();
+  let yyyy = today.getFullYear();
   if(dd<10){
     dd='0'+dd;
   }
@@ -50,7 +50,6 @@ co(function *() {
     mm='0'+mm;
   }
 
-  var currentDate = `${mm}-${dd}-${yyyy}`
-  console.log(currentDate)
+  let currentDate = `${mm}-${dd}-${yyyy}`
   uploadToS3(`${currentDate}.json`, json)
 })
