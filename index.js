@@ -46,7 +46,7 @@ function getJson(payload, context) {
     var totalPages = firstJsonPage.total
     var json = ''
 
-    for(var i = 0; i <= 9 ; i += 10){
+    for(var i = 0; i <= total ; i += 10){
       var response = yield fetch(`${baseUrl}${i}`)
       var jsonPage = yield response.json()
       var results = jsonPage.results
