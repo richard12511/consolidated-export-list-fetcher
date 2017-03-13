@@ -1,9 +1,8 @@
-var https = require('https')
-var AWS = require('aws-sdk')
-var fetch = require('node-fetch')
-var co = require('co')
-var s3 = new AWS.S3()
-var baseUrl = "https://api.trade.gov/v2/consolidated_screening_list/search?api_key=hjuIpTBn7qlIO3_8mMRL_0gS&offset="
+const AWS = require('aws-sdk')
+const fetch = require('node-fetch')
+const co = require('co')
+const s3 = new AWS.S3()
+const baseUrl = "https://api.trade.gov/v2/consolidated_screening_list/search?api_key=hjuIpTBn7qlIO3_8mMRL_0gS&offset="
 
 function uploadToS3(keyName, body){
 
@@ -27,9 +26,10 @@ co(function *() {
   let json = ''
 
   for(let i = 0; i <= 9 ; i += 10){
-    let response = yield fetch(`${baseUrl}${0}`)
+    let response = yield fetch(`${baseUrl}${i}`)
     let jsonPage = yield response.json()
     let results = jsonPage.results
+
     let jsonResults = JSON.stringify(results)
     jsonResults = jsonResults.replace(/]$/, "")
     jsonResults = jsonResults.replace(/^\[/,"")
@@ -37,6 +37,20 @@ co(function *() {
   }
 
   json = json.replace(/,\s*$/, "");
-  console.log(json)
-  uploadToS3('first-page.json', json)
+
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth()+1; //January is 0!
+
+  var yyyy = today.getFullYear();
+  if(dd<10){
+    dd='0'+dd;
+  }
+  if(mm<10){
+    mm='0'+mm;
+  }
+
+  var currentDate = `${mm}-${dd}-${yyyy}`
+  console.log(currentDate)
+  uploadToS3(`${currentDate}.json`, json)
 })
