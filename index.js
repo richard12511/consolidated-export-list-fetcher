@@ -25,7 +25,7 @@ co(function *() {
   const totalPages = firstJsonPage.total
   let json = ''
 
-  for(let i = 0; i <= 9 ; i += 10){
+  for(let i = 0; i <= total ; i += 10){
     let response = yield fetch(`${baseUrl}${i}`)
     let jsonPage = yield response.json()
     let results = jsonPage.results
