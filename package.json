@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/HeatTransferResearch/consolidated-list-fetcher/issues"
   },
-  "homepage": "https://github.com/HeatTransferResearch/consolidated-list-fetcher#readme"
+  "homepage": "https://github.com/HeatTransferResearch/consolidated-list-fetcher#readme",
+  "dependencies": {
+    "co": "^4.6.0",
+    "node-fetch": "^1.6.3"
+  }
 }
