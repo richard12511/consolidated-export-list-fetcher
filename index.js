@@ -13,11 +13,11 @@ function uploadToS3(keyName, body, context){
     s3.putObject(params, function(err, data) {
       if (err){
         context.succeed(`Error uploading to S3`)
-        //console.log(err)
+        // console.log(err)
       }
       else {
         context.succeed(`Successfully uploaded data to ${bucketName}/${keyName}`)
-        //console.log(`Successfully uploaded data to ${bucketName}/${keyName}`)
+        // console.log(`Successfully uploaded data to ${bucketName}/${keyName}`)
       }
     });
   });
@@ -46,7 +46,7 @@ function getJson(payload, context) {
     var totalPages = firstJsonPage.total
     var json = ''
 
-    for(var i = 0; i <= total ; i += 10){
+    for(var i = 0; i <= totalPages ; i += 10){
       var response = yield fetch(`${baseUrl}${i}`)
       var jsonPage = yield response.json()
       var results = jsonPage.results
