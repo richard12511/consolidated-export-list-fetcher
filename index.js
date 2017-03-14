@@ -4,7 +4,7 @@ var co = require('co')
 var s3 = new AWS.S3()
 var baseUrl = "https://api.trade.gov/v2/consolidated_screening_list/search?api_key=hjuIpTBn7qlIO3_8mMRL_0gS&offset="
 
-function uploadToS3(keyName, body, context){
+function uploadToS3(keyName, body, context, callback){
 
   var bucketName = 'export-control-prod'
 
@@ -12,11 +12,11 @@ function uploadToS3(keyName, body, context){
     var params = {Bucket: bucketName, Key: keyName, Body: body}
     s3.putObject(params, function(err, data) {
       if (err){
-        context.succeed(`Error uploading to S3`)
+        callback(err, `Error uploading to S3`)
         // console.log(err)
       }
       else {
-        context.succeed(`Successfully uploaded data to ${bucketName}/${keyName}`)
+        callback(null, `Successfully uploaded data to ${bucketName}/${keyName}`)
         // console.log(`Successfully uploaded data to ${bucketName}/${keyName}`)
       }
     });
@@ -39,7 +39,7 @@ function getCurrentDate(){
   return `${mm}-${dd}-${yyyy}`
 }
 
-function getJson(payload, context) {
+function getJson(payload, context, callback) {
   co(function *() {
     var firstPage = yield fetch(`${baseUrl}${0}`)
     var firstJsonPage = yield firstPage.json()
@@ -59,8 +59,9 @@ function getJson(payload, context) {
 
     json = json.replace(/,\s*$/, "")
     var currentDate = getCurrentDate()
-    uploadToS3(`${currentDate}.json`, json, context)
+    uploadToS3(`${currentDate}.json`, json, context, callback)
   })
 }
 
 exports.handler = getJson
+// getJson()
