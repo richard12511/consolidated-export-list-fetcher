@@ -44,7 +44,7 @@ function getJson(payload, context, callback) {
     var firstPage = yield fetch(`${baseUrl}${0}`)
     var firstJsonPage = yield firstPage.json()
     var totalPages = firstJsonPage.total
-    var json = ''
+    var json = `{ "Total": ${totalPages}, "Results": [`
 
     for(var i = 0; i <= totalPages ; i += 10){
       var response = yield fetch(`${baseUrl}${i}`)
@@ -58,6 +58,7 @@ function getJson(payload, context, callback) {
     }
 
     json = json.replace(/,\s*$/, "")
+    json = `${json}]}`
     var currentDate = getCurrentDate()
     uploadToS3(`${currentDate}.json`, json, context, callback)
   })
