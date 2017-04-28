@@ -64,5 +64,5 @@ function getJson(payload, context, callback) {
   })
 }
 
-exports.handler = getJson
-// getJson()
+//exports.handler = getJson
+getJson()
