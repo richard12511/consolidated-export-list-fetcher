@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/HeatTransferResearch/consolidated-list-fetcher.git"
+    "url": "git+https://github.com/richard12511/consolidated-export-list-fetcher.git"
   },
   "author": "richard12511",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/HeatTransferResearch/consolidated-list-fetcher/issues"
+    "url": "https://github.com/richard12511/consolidated-export-list-fetcher/issues"
   },
-  "homepage": "https://github.com/HeatTransferResearch/consolidated-list-fetcher#readme",
+  "homepage": "https://github.com/richard12511/consolidated-export-list-fetcher#readme",
   "dependencies": {
     "co": "^4.6.0",
     "node-fetch": "^1.6.3"
